@@ -202,6 +202,7 @@ class RehearsalTrainer(Trainer):
             memout = self.model(batch_mem)
 
             if is_train:
+                self.optimizer.zero_grad()
                 mem_loss = torch.tensor([0.0], device=self.device)
                 for loss_def, w in self.loss_functions:
                     mem_loss += loss_def.get_loss(memout, self.model) * w
